@@ -14,7 +14,6 @@ final class ConfettiViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
         createEmitterLayer()
     }
 
@@ -43,7 +42,7 @@ final class ConfettiViewController: UIViewController {
             let cell = CAEmitterCell()
             cell.contents = images[index]
             
-            cell.birthRate = 5
+            cell.birthRate = 10
             cell.lifetime = 100
             cell.velocity = 150
             cell.scale = 0.1
@@ -62,12 +61,11 @@ final class ConfettiViewController: UIViewController {
             cell.lifetime = 100
             cell.velocity = 200
             cell.spin = 4
-            cell.spinRange = 50.0
+            cell.spinRange = 10.0
             cell.scale = 0.04
             
             cell.emissionRange = CGFloat.pi / 2
             cell.emissionLongitude = CGFloat.pi
-            cell.yAcceleration = 3.0
             
         }
         
@@ -78,9 +76,7 @@ final class ConfettiViewController: UIViewController {
         emitterLayer?.emitterPosition = CGPoint(x: view.frame.width / 2, y: 25)
         emitterLayer?.emitterSize = CGSize(width: view.frame.width, height: 1)
         
-        view.layer.addSublayer(emitterLayer!)
-        
-        print(view.layer.sublayers!)
+        view.layer.addSublayer(emitterLayer ?? CAEmitterLayer())
     }
 }
 
