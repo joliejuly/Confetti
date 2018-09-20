@@ -10,11 +10,17 @@ import UIKit
 
 final class ConfettiViewController: UIViewController {
 
+    private var emitterLayer: CAEmitterLayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
 
-
+    private func createEmitterLayer() {
+        emitterLayer = CAEmitterLayer()
+        
+        
+    }
 }
 
