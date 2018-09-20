@@ -25,4 +25,18 @@ extension UIImage {
         return pink
     }
     
+    static var pinkDot: UIImage? {
+        guard let pink = UIImage(named: "pink_dot.png") else { return nil }
+        return pink
+    }
+    
+    static var greenDot: UIImage? {
+        guard let green = UIImage(named: "green_dot.png") else { return nil }
+        return green
+    }
+    
+    static var yellowDot: UIImage? {
+        guard let yellow = UIImage(named: "yellow_dot.png") else { return nil }
+        return yellow
+    }
 }

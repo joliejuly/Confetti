@@ -14,6 +14,7 @@ final class ConfettiViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .gray
         createEmitterLayer()
     }
 
@@ -21,29 +22,65 @@ final class ConfettiViewController: UIViewController {
         emitterLayer = CAEmitterLayer()
         
         let purpleCell = CAEmitterCell()
-        purpleCell.contents = UIImage.purpleConfetti
+        purpleCell.contents = UIImage.purpleConfetti?.cgImage
         
         let pinkCell = CAEmitterCell()
-        pinkCell.contents = UIImage.pinkConfetti
+        pinkCell.contents = UIImage.pinkConfetti?.cgImage
         
         let yellowCell = CAEmitterCell()
-        yellowCell.contents = UIImage.yellowConfetti
+        yellowCell.contents = UIImage.yellowConfetti?.cgImage
         
+        var dotCells = [CAEmitterCell]()
         
-        let cells = [purpleCell, pinkCell, yellowCell]
+        let images = [
+            UIImage.pinkDot?.cgImage,
+            UIImage.greenDot?.cgImage,
+            UIImage.yellowDot?.cgImage
+        ]
+        
+        for index in 0..<images.count {
+            
+            let cell = CAEmitterCell()
+            cell.contents = images[index]
+            
+            cell.birthRate = 5
+            cell.lifetime = 100
+            cell.velocity = 150
+            cell.scale = 0.1
+            
+            cell.emissionRange = CGFloat.pi / 2
+            cell.emissionLongitude = CGFloat.pi
+            
+            dotCells.append(cell)
+            
+        }
+        
+        var cells = [purpleCell, pinkCell, yellowCell]
         
         cells.forEach { cell in
             cell.birthRate = 10
-            cell.lifetime = 10
-            cell.velocity = 100
-            cell.spin = 0.3
+            cell.lifetime = 100
+            cell.velocity = 200
+            cell.spin = 4
+            cell.spinRange = 50.0
+            cell.scale = 0.04
+            
+            cell.emissionRange = CGFloat.pi / 2
+            cell.emissionLongitude = CGFloat.pi
+            cell.yAcceleration = 3.0
+            
         }
         
+        cells += dotCells
         emitterLayer?.emitterCells = cells
-        emitterLayer?.emitterSize = CGSize(width: view.frame.width, height: 2)
-        emitterLayer?.emitterShape = .line
         
-        view.layer.addSublayer(emitterLayer ?? CAEmitterLayer())
+        emitterLayer?.emitterShape = .line
+        emitterLayer?.emitterPosition = CGPoint(x: view.frame.width / 2, y: 25)
+        emitterLayer?.emitterSize = CGSize(width: view.frame.width, height: 1)
+        
+        view.layer.addSublayer(emitterLayer!)
+        
+        print(view.layer.sublayers!)
     }
 }
 
